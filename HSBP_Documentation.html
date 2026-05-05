@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HSBP Documentation</title>
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --primary: #4f46e5;
+      --primary-soft: #e0e7ff;
+      --border: #e2e8f0;
+      --ok: #16a34a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 28px auto;
+      padding: 0 16px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1e1b4b, #3730a3);
+      color: #fff;
+      border-radius: 14px;
+      padding: 22px 24px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.2);
+    }
+
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 1.6rem;
+    }
+
+    .header p {
+      margin: 0;
+      color: #c7d2fe;
+      font-size: 0.95rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .panel {
+      display: none;
+      margin-top: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+    }
+
+    .panel.active { display: block; }
+
+    h2 {
+      margin: 0 0 8px;
+      color: #0f172a;
+      font-size: 1.25rem;
+    }
+
+    h3 {
+      margin: 20px 0 8px;
+      font-size: 1rem;
+      color: #111827;
+    }
+
+    .muted { color: var(--muted); }
+
+    .section {
+      border-top: 1px solid var(--border);
+      margin-top: 16px;
+      padding-top: 14px;
+    }
+
+    ul, ol { margin: 8px 0 0 22px; }
+    li { margin: 4px 0; }
+
+    .code {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      overflow-x: auto;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.86rem;
+      white-space: pre;
+      margin-top: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      background: #fafcff;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #dcfce7;
+      color: #14532d;
+      border: 1px solid #86efac;
+      font-size: 0.78rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>HSBP Project Documentation</h1>
+      <p>Single-page tabbed guide for presentation preparation (Technical + Non-Technical)</p>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="technical">Technical Documentation</button>
+        <button class="tab-btn" data-tab="nontechnical">Non-Technical Documentation</button>
+      </div>
+    </header>
+
+    <section id="technical" class="panel active">
+      <h2>Technical Documentation</h2>
+      <p class="muted">Detailed system-level explanation of architecture, implementation, and working flow.</p>
+
+      <div class="section">
+        <h3>1) Project Overview</h3>
+        <ul>
+          <li>HSBP is a MERN-based web application for booking local home services.</li>
+          <li>Roles supported: <strong>Customer</strong>, <strong>Provider</strong>, <strong>Admin</strong>.</li>
+          <li>End-to-end flow includes service listing, booking lifecycle, approvals, and account management.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>2) Technology Stack</h3>
+        <div class="grid">
+          <div class="card"><strong>Frontend</strong><br />React, Vite, React Router, Axios</div>
+          <div class="card"><strong>Backend</strong><br />Node.js, Express.js</div>
+          <div class="card"><strong>Database</strong><br />MongoDB + Mongoose</div>
+          <div class="card"><strong>Security</strong><br />JWT + bcryptjs + role middleware</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>3) High-Level Architecture</h3>
+        <ol>
+          <li>React frontend sends API requests to Express backend.</li>
+          <li>Backend validates JWT and role permissions.</li>
+          <li>Controllers execute business logic.</li>
+          <li>Mongoose models read/write MongoDB data.</li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <h3>4) Folder Structure</h3>
+        <div class="code">HSBP/
+  backend/
+    src/
+      config/       # DB connection
+      controllers/  # business logic
+      middleware/   # auth + roles
+      models/       # User, Service, Booking
+      routes/       # API endpoints
+      server.js
+      seed.js
+  frontend/
+    src/
+      api/
+      components/
+      context/
+      pages/
+      theme.js</div>
+      </div>
+
+      <div class="section">
+        <h3>5) Backend Core Modules</h3>
+        <ul>
+          <li><strong>User model:</strong> name, email, password, role, isApproved, resetToken, resetTokenExpiry.</li>
+          <li><strong>Service model:</strong> title, category, description, price, provider reference.</li>
+          <li><strong>Booking model:</strong> user, provider, service, address, schedule, status.</li>
+          <li><strong>Auth middleware:</strong> `protect` + `allowRoles` for access control.</li>
+          <li><strong>Controllers:</strong> auth, service, booking, admin domain handlers.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>6) Frontend Core Modules</h3>
+        <ul>
+          <li><strong>App routing:</strong> public + protected routes using `ProtectedRoute`.</li>
+          <li><strong>Layout:</strong> role-based sidebar shell for authenticated users.</li>
+          <li><strong>AuthContext:</strong> stores current user and login/logout state.</li>
+          <li><strong>Toast system:</strong> centralized success/error/info/warning notifications.</li>
+          <li><strong>Axios interceptor:</strong> attaches JWT from local storage to API calls.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>7) Key API Groups</h3>
+        <ul>
+          <li><strong>/api/auth</strong>: register, login, profile, forgot/reset password</li>
+          <li><strong>/api/services</strong>: list/create/my-services/delete</li>
+          <li><strong>/api/bookings</strong>: create/my/provider/status-update</li>
+          <li><strong>/api/admin</strong>: users/providers approval/bookings/password reset</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>8) Role-wise Flow</h3>
+        <div class="grid">
+          <div class="card"><strong>Customer</strong><br />Login -> browse services -> book -> track/cancel</div>
+          <div class="card"><strong>Provider</strong><br />Register -> approval -> add service -> manage assigned bookings</div>
+          <div class="card"><strong>Admin</strong><br />Approve providers -> monitor users/bookings -> reset user passwords</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>9) Security & Validation</h3>
+        <ul>
+          <li>Passwords are hashed with bcrypt before storage.</li>
+          <li>JWT tokens are verified for protected endpoints.</li>
+          <li>Role and ownership checks prevent unauthorized updates.</li>
+          <li>Provider self-booking is blocked.</li>
+          <li>Password reset token has expiration.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>10) Setup to Run (Local)</h3>
+        <div class="code"># 1) Start MongoDB
+mongod --dbpath "%USERPROFILE%\HSBP\data"
+
+# 2) Backend
+cd backend
+copy .env.example .env
+npm install
+npm run dev
+
+# 3) Seed Admin
+node src/seed.js
+
+# 4) Frontend
+cd ../frontend
+npm install
+npm run dev</div>
+        <span class="badge">Frontend: http://localhost:5173 | Backend: http://localhost:5000</span>
+      </div>
+
+      <div class="section">
+        <h3>11) Features Implemented</h3>
+        <ul>
+          <li>Modern home page and improved UI theme.</li>
+          <li>Service search and category filters.</li>
+          <li>Provider booking actions: accept, decline, complete.</li>
+          <li>User cancellation of pending bookings.</li>
+          <li>Provider service delete support.</li>
+          <li>Profile edit page and toast notifications.</li>
+          <li>Forgot/reset password and admin password change.</li>
+          <li>Responsive dashboard layout and role-based navigation.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="nontechnical" class="panel">
+      <h2>Non-Technical Documentation</h2>
+      <p class="muted">Simple business-level explanation for presentation and viva.</p>
+
+      <div class="section">
+        <h3>1) What is HSBP?</h3>
+        <p>HSBP is an online platform where people can quickly find and book nearby home services like plumbing, electrical work, cleaning, carpentry, painting, and AC repair.</p>
+      </div>
+
+      <div class="section">
+        <h3>2) Why this project was built</h3>
+        <ul>
+          <li>Local service discovery is mostly unorganized and trust is low.</li>
+          <li>Customers often waste time finding reliable providers.</li>
+          <li>HSBP provides one organized system to discover, book, and track services.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>3) User Roles and Benefits</h3>
+        <div class="grid">
+          <div class="card">
+            <strong>Customer</strong>
+            <ul>
+              <li>Search and book services</li>
+              <li>Track booking status</li>
+              <li>Cancel pending requests</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>Provider</strong>
+            <ul>
+              <li>List offered services</li>
+              <li>Receive booking requests</li>
+              <li>Accept/reject/complete jobs</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>Admin</strong>
+            <ul>
+              <li>Approve providers</li>
+              <li>Monitor users and bookings</li>
+              <li>Maintain platform quality</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>4) End-to-End User Journey (Simple)</h3>
+        <ol>
+          <li>Customer signs up and logs in.</li>
+          <li>Customer selects service and places booking.</li>
+          <li>Provider receives booking and responds.</li>
+          <li>Job is completed and status is updated.</li>
+          <li>Admin can supervise and handle issues.</li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <h3>5) Phase-wise Build Journey</h3>
+        <ul>
+          <li><strong>Phase 1:</strong> Setup + login + role system</li>
+          <li><strong>Phase 2:</strong> Services + bookings + dashboards</li>
+          <li><strong>Phase 3:</strong> UI polish + home page + responsive layout</li>
+          <li><strong>Phase 4:</strong> Password reset + profile + admin controls</li>
+          <li><strong>Phase 5:</strong> Error fixes + cleanup + demo readiness</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>6) Value Delivered</h3>
+        <ul>
+          <li>Improves convenience for customers.</li>
+          <li>Creates digital visibility for local providers.</li>
+          <li>Introduces trust via provider approval workflow.</li>
+          <li>Makes service lifecycle traceable from booking to completion.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>7) Current Limitations</h3>
+        <ul>
+          <li>No payment gateway integration yet.</li>
+          <li>No email provider integration for reset links (demo mode).</li>
+          <li>No rating/review module yet.</li>
+          <li>No production deployment pipeline included.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>8) Future Scope</h3>
+        <ul>
+          <li>Online payments and invoices</li>
+          <li>Email/SMS and real-time notifications</li>
+          <li>Ratings and customer reviews</li>
+          <li>Analytics dashboard and reports</li>
+          <li>Mobile app version</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>9) PPT-Ready Slide Sequence</h3>
+        <ol>
+          <li>Problem statement</li>
+          <li>Proposed solution (HSBP)</li>
+          <li>User roles and use-cases</li>
+          <li>Workflow (customer-provider-admin)</li>
+          <li>Features delivered</li>
+          <li>Phase-wise development</li>
+          <li>Challenges and fixes</li>
+          <li>Future scope and conclusion</li>
+        </ol>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll(".tab-btn");
+    const panels = document.querySelectorAll(".panel");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.tab;
+
+        buttons.forEach((b) => b.classList.remove("active"));
+        panels.forEach((p) => p.classList.remove("active"));
+
+        btn.classList.add("active");
+        document.getElementById(target).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>

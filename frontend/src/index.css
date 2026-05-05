@@ -1,0 +1,49 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+  line-height: 1.5;
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; }
+
+table th {
+  padding: 13px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}
+
+/* ── Toast slide-in ── */
+@keyframes slideIn {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  /* Sidebar hidden on mobile — handled in Layout.jsx */
+
+  /* Public 2-col pages */
+  .two-col { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 640px) {
+  /* Grids → single col */
+  .r-grid { grid-template-columns: 1fr !important; }
+
+  /* Page padding */
+  .r-pad { padding: 16px !important; }
+}
+
+/* Hover effects */
+button:not(:disabled):hover { opacity: 0.9; }
